@@ -2,7 +2,6 @@ import streamlit as st
 import pickle
 import numpy as np
 import pandas as pd
-import sklearn
 
 model = pickle.load(open('prediction_model.p', 'rb'))
 
@@ -40,30 +39,9 @@ def main():
         company_size = st.selectbox('Company Size', ("1+", "51+", "201+", "501+", "1001+", "5001+", "10000+", "Unknown"))
         st.caption('Description: \n - 1+: 1 to 50 Employees\n - 51+: 51 to 200 Employees\n- 201+: 201 to 500 Employees\n - 501+: 501 to 1000 Employees\n - 1001+: 1000 to 5000 Employees\n - 5001+: 5001 to 10000 Employees\n - 10000+: Over 10000 Employees')
         type_of_ownership = st.selectbox('Type of ownership', ('Company - Public', 'Company - Private', 'Subsidiary or Business Segment', 'Government', 'College / University', 'Contract', 'Unknown'))
-        industry = st.selectbox('Industry (default -1 as Unknown)', ('-1', 'Investment Banking & Asset Management', 'Internet',
-       'Computer Hardware & Software', 'Staffing & Outsourcing',
-       'Energy', 'Enterprise Software & Network Solutions', 'Lending',
-       'IT Services', 'Travel Agencies',
-       'Financial Transaction Processing',
-       'Consumer Products Manufacturing',
-       'Transportation Equipment Manufacturing', 'Video Games',
-       'Colleges & Universities', 'Insurance Carriers',
-       'Health Care Services & Hospitals', 'Federal Agencies',
-       'Biotech & Pharmaceuticals', 'Gas Stations', 'Aerospace & Defense',
-       'Gambling', 'TV Broadcast & Cable Networks',
-       'Insurance Agencies & Brokerages', 'Real Estate',
-       'Financial Analytics & Research', 'Food & Beverage Manufacturing',
-       'Advertising & Marketing', 'Department, Clothing, & Shoe Stores',
-       'Brokerage Services', 'Grocery Stores & Supermarkets',
-       'Telecommunications Services',
-       'Motion Picture Production & Distribution', 'Sports & Recreation',
-       'Audiovisual', 'Oil & Gas Services'))
+        industry = st.selectbox('Industry', ('Advertising & Marketing', 'Aerospace & Defense', 'Audiovisual', 'Biotech & Pharmaceuticals', 'Brokerage Services', 'Colleges & Universities', 'Computer Hardware & Software', 'Consumer Products Manufacturing', 'Department, Clothing, & Shoe Stores', 'Energy', 'Enterprise Software & Network Solutions', 'Federal Agencies', 'Financial Analytics & Research', 'Financial Transaction Processing', 'Food & Beverage Manufacturing', 'Gambling', 'Gas Stations', 'Grocery Stores & Supermarkets', 'Health Care Services & Hospitals', 'IT Services', 'Insurance Agencies & Brokerages', 'Insurance Carriers', 'Internet', 'Investment Banking & Asset Management', 'Lending', 'Motion Picture Production & Distribution', 'Oil & Gas Services', 'Real Estate', 'Sports & Recreation', 'Staffing & Outsourcing', 'TV Broadcast & Cable Networks', 'Telecommunications Services', 'Transportation Equipment Manufacturing', 'Travel Agencies', 'Unknown', 'Video Games'))
         
-        revenue = st.selectbox('Company Revenue', ('-1', '$50 to $100 million ', 'Unknown / Non-Applicable', 'Less than $1 million ', '$100 to $500 million ',
-       '$2 to $5 billion ', '$10 to $25 million ', '$5 to $10 million ',
-       '$25 to $50 million ', '$10+ billion ',
-       '$500 million to $1 billion ', '$1 to $5 million ',
-       '$5 to $10 billion ', '$1 to $2 billion '))
+        revenue = st.selectbox('Company Revenue', ('$1 to $2 billion ', '$1 to $5 million ', '$10 to $25 million ', '$10+ billion ', '$100 to $500 million ', '$2 to $5 billion ', '$25 to $50 million ', '$5 to $10 billion ', '$5 to $10 million ', '$50 to $100 million ', '$500 million to $1 billion ', 'Less than $1 million ', 'Unknown / Non-Applicable'))
 
         hourly = 0
         hourly_wage = st.radio('Hourly Wage', ('Yes', 'No'))
@@ -126,14 +104,14 @@ def main():
             else:
                 predict['type_of_ownership_{}'.format(x)] = 0
                 
-        industry_list = ['-1', 'Advertising & Marketing', 'Aerospace & Defense', 'Audiovisual', 'Biotech & Pharmaceuticals', 'Brokerage Services', 'Colleges & Universities', 'Computer Hardware & Software', 'Consumer Products Manufacturing', 'Department, Clothing, & Shoe Stores', 'Energy', 'Enterprise Software & Network Solutions', 'Federal Agencies', 'Financial Analytics & Research', 'Financial Transaction Processing', 'Food & Beverage Manufacturing', 'Gambling', 'Gas Stations', 'Grocery Stores & Supermarkets', 'Health Care Services & Hospitals', 'IT Services', 'Insurance Agencies & Brokerages', 'Insurance Carriers', 'Internet', 'Investment Banking & Asset Management', 'Lending', 'Motion Picture Production & Distribution', 'Oil & Gas Services', 'Real Estate', 'Sports & Recreation', 'Staffing & Outsourcing', 'TV Broadcast & Cable Networks', 'Telecommunications Services', 'Transportation Equipment Manufacturing', 'Travel Agencies', 'Video Games']   
+        industry_list = ['Advertising & Marketing', 'Aerospace & Defense', 'Audiovisual', 'Biotech & Pharmaceuticals', 'Brokerage Services', 'Colleges & Universities', 'Computer Hardware & Software', 'Consumer Products Manufacturing', 'Department, Clothing, & Shoe Stores', 'Energy', 'Enterprise Software & Network Solutions', 'Federal Agencies', 'Financial Analytics & Research', 'Financial Transaction Processing', 'Food & Beverage Manufacturing', 'Gambling', 'Gas Stations', 'Grocery Stores & Supermarkets', 'Health Care Services & Hospitals', 'IT Services', 'Insurance Agencies & Brokerages', 'Insurance Carriers', 'Internet', 'Investment Banking & Asset Management', 'Lending', 'Motion Picture Production & Distribution', 'Oil & Gas Services', 'Real Estate', 'Sports & Recreation', 'Staffing & Outsourcing', 'TV Broadcast & Cable Networks', 'Telecommunications Services', 'Transportation Equipment Manufacturing', 'Travel Agencies', 'Unknown', 'Video Games']   
         for x in industry_list:
             if x == industry:
                 predict['industry_{}'.format(x)] = 1
             else:
                 predict['industry_{}'.format(x)] = 0
                 
-        revenue_list = ['$1 to $2 billion ', '$1 to $5 million ', '$10 to $25 million ', '$10+ billion ', '$100 to $500 million ', '$2 to $5 billion ', '$25 to $50 million ', '$5 to $10 billion ', '$5 to $10 million ', '$50 to $100 million ', '$500 million to $1 billion ', '-1', 'Less than $1 million ', 'Unknown / Non-Applicable']
+        revenue_list = ['$1 to $2 billion ', '$1 to $5 million ', '$10 to $25 million ', '$10+ billion ', '$100 to $500 million ', '$2 to $5 billion ', '$25 to $50 million ', '$5 to $10 billion ', '$5 to $10 million ', '$50 to $100 million ', '$500 million to $1 billion ', 'Less than $1 million ', 'Unknown / Non-Applicable']
         for x in revenue_list:
             if x == revenue:
                 predict['revenue_{}'.format(x)] = 1
@@ -164,6 +142,7 @@ def main():
         predict = predict.drop(['tool', 'company_size', 'type_of_ownership', 'industry', 'revenue', 'job_state', 'job_simplified', 'seniority'], axis = 1)
         
         # st.write(predict)
+        st.write(predict)
 
         # predict = predict.drop('tool', axis = 1)
         # dummy_df = pd.get_dummies(predict)
