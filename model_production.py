@@ -141,9 +141,6 @@ def main():
         
         predict = predict.drop(['tool', 'company_size', 'type_of_ownership', 'industry', 'revenue', 'job_state', 'job_simplified', 'seniority'], axis = 1)
         
-        # st.write(predict)
-        st.write(predict)
-
         # predict = predict.drop('tool', axis = 1)
         # dummy_df = pd.get_dummies(predict)
         # st.write(dummy_df)
