@@ -10,7 +10,7 @@ model = pickle.load(open('prediction_model.p', 'rb'))
 def main():
     
     # Batch Upload Prediction
-
+    st.markdown('<style> .css-18e3th9, .stApp, .css-fg4pbf, .streamlit-wide, .eczokvf0 { padding-top: 1em; padding-left: 2em; padding-right: 2em; font-family: Inter } h1, .st-ae {font-family: Inter}</style> ', unsafe_allow_html=True)
     st.title('Salary Prediction')
     option = st.selectbox('How would you like to predict the salary of Data Scientists?', ('Manual Input', 'Batch Upload'))
 
